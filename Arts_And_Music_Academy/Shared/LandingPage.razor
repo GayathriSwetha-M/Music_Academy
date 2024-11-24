@@ -1,0 +1,289 @@
+@inherits LayoutComponentBase
+@inject IJSRuntime JSRuntime
+
+@page "/"
+
+<div class="top-bar">
+    <div class="title">Perfect Music Academy</div>
+    <nav class="nav-links">
+        <a @onclick='() => ScrollToSection("about")' href="javascript:void(0)">About Perfect</a>
+        <a @onclick='() => ScrollToSection("courses")' href="javascript:void(0)">Courses Offered</a>
+        <a @onclick='() => ScrollToSection("events")' href="javascript:void(0)">Upcoming Events</a>
+        <a @onclick='() => ScrollToSection("stars")' href="javascript:void(0)">Leading Stars</a>
+        <a @onclick='() => ScrollToSection("register")' href="javascript:void(0)">Enquiry</a>
+    </nav>
+    <button class="menu-toggle" @onclick="ToggleMenu">☰</button>
+</div>
+
+<div class="sidebar" style="display: @(isMenuOpen ? "flex" : "none")">
+    <a @onclick='() => ScrollToSection("about")' href="javascript:void(0)">About Perfect</a>
+    <a @onclick='() => ScrollToSection("courses")' href="javascript:void(0)">Courses Offered</a>
+    <a @onclick='() => ScrollToSection("events")' href="javascript:void(0)">Upcoming Events</a>
+    <a @onclick='() => ScrollToSection("stars")' href="javascript:void(0)">Leading Stars</a>
+    <a @onclick='() => ScrollToSection("register")' href="javascript:void(0)">Enquiry</a>
+</div>
+
+<div class="about-section" id="about">
+    <div class="about-content">
+        <h2>Discover Your Musical Journey</h2>
+        <p>At Perfect Music Academy, we transform passion into performance. Join us to explore a world of rhythm, melody, and harmony, where creativity knows no bounds. Whether you're a budding musician or a seasoned artist, our expert instructors and vibrant community will inspire you to reach new heights.</p>
+    </div>
+</div>
+
+<div class="courses-section" id="courses">
+    <h2>Courses Offered</h2>
+    <div class="course-list">
+        <div class="course-item">
+            <i class="fas fa-keyboard"></i>
+            <h3>Keyboard</h3>
+            <p>Master the keys and create beautiful melodies.</p>
+        </div>
+        <div class="course-item">
+            <i class="fas fa-guitar"></i>
+            <h3>Guitar</h3>
+            <p>Strum your way to musical excellence.</p>
+        </div>
+        <div class="course-item">
+            <i class="fas fa-drum"></i>
+            <h3>Drums</h3>
+            <p>Feel the rhythm and keep the beat alive.</p>
+        </div>
+        <div class="course-item">
+            <i class="fas fa-music"></i>
+            <h3>Violin</h3>
+            <p>Experience the elegance of string music.</p>
+        </div>
+        <div class="course-item">
+            <i class="fas fa-drum"></i>
+            <h3>Tabla</h3>
+            <p>Explore the intricate rhythms of Indian music.</p>
+        </div>
+        <div class="course-item">
+            <i class="fas fa-music"></i>
+            <h3>Flute</h3>
+            <p>Let the sweet notes of the flute enchant you.</p>
+        </div>
+        <div class="course-item">
+            <i class="fas fa-music"></i>
+            <h3>Saxophone</h3>
+            <p>Jazz up your life with smooth saxophone sounds.</p>
+        </div>
+    </div>
+</div>
+
+<div class="events-section" id="events">
+    <h2>Upcoming Events</h2>
+    <div class="event-container">
+        <button class="slider-btn prev-btn" @onclick="PrevSlide">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        
+        <div class="event-slider">
+            @foreach (var index in Enumerable.Range(0, events.Length))
+            {
+                <div class="event-item @(currentSlide == index ? "active" : "")" 
+                     style="transform: translateX(@(100 * (index - currentSlide))%)">
+                    <div class="event-content">
+                        <h3>@events[index].Title</h3>
+                        <p>@events[index].Description</p>
+                        <div class="event-details">
+                            <span><i class="fas fa-calendar"></i> @events[index].Date</span>
+                            <span><i class="fas fa-clock"></i> @events[index].Time</span>
+                            <span><i class="fas fa-map-marker-alt"></i> @events[index].Venue</span>
+                        </div>
+                        <button class="register-btn">Register Now</button>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <button class="slider-btn next-btn" @onclick="NextSlide">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+</div>
+<div class="stars-section" id="stars">
+    <h2>Leading Stars</h2>
+    <div class="stars-container">
+        <div class="star-card side-card left">
+            <div class="profile-img">
+                <img src="/Images/Person-1.jpg" alt="Star 2" />
+            </div>
+            <div class="star-card-content">
+                <h3>Sarah Mitchell</h3>
+                <p class="talent">Classical Violin</p>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                <div class="awards">
+                    <p><i class="fas fa-trophy"></i> National Youth Orchestra</p>
+                    <p><i class="fas fa-award"></i> Young Artist Award 2023</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="star-card center-card">
+            <div class="profile-img">
+                <img src="/Images/Person-2.jpg" alt="Star 1" />
+            </div>
+            <div class="star-card-content">
+                <h3>Michael Anderson</h3>
+                <p class="talent">Piano Virtuoso</p>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="awards">
+                    <p><i class="fas fa-trophy"></i> International Piano Competition Winner</p>
+                    <p><i class="fas fa-award"></i> Excellence in Music 2024</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="star-card side-card right">
+            <div class="profile-img">
+                <img src="/Images/Person-3.jpg" alt="Star 3" />
+            </div>
+            <div class="star-card-content">
+                <h3>Emily Chen</h3>
+                <p class="talent">Guitar Performance</p>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <div class="awards">
+                    <p><i class="fas fa-trophy"></i> Guitar Fest Champion</p>
+                    <p><i class="fas fa-award"></i> Rising Star Award 2023</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="enquiry-section" id="register">
+    <div class="enquiry-container">
+        <div class="contact-info">
+            <h3>Contact Us</h3>
+            <div class="contact-details">
+                <span><i class="fas fa-phone"></i> +91 9876543210</span>
+                <span><i class="fas fa-envelope"></i> info@perfectmusic.com</span>
+            </div>
+            <div class="social-links">
+                <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+            <button class="enquiry-btn" onclick="window.location.href='enquiry-form'">
+                <i class="fas fa-paper-plane"></i> Enquire Now
+            </button>
+        </div>
+    </div>
+</div>
+
+@code {   
+     private bool isMenuOpen = false;
+    private int currentSlide = 0;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("addResizeListener", DotNetObjectReference.Create(this));
+        }
+    }
+
+    [JSInvokable]
+    public void HandleResize()
+    {
+        if (isMenuOpen)
+        {
+            isMenuOpen = false;
+            StateHasChanged();
+        }
+    }
+    private void ScrollToSection(string elementId)
+    {
+        isMenuOpen = false;
+        StateHasChanged();
+        JSRuntime.InvokeVoidAsync("scrollToElement", elementId);
+    }
+    
+    private EventData[] events = new[]
+    {
+        new EventData 
+        { 
+            Title = "Summer Music Festival 2024",
+            Description = "Join us for an evening of enchanting performances by our talented students and faculty.",
+            Date = "June 15, 2024",
+            Time = "6:00 PM",
+            Venue = "Main Auditorium"
+        },
+        new EventData 
+        { 
+            Title = "Classical Music Night",
+            Description = "Experience the magic of classical masterpieces performed by our accomplished musicians.",
+            Date = "July 1, 2024",
+            Time = "7:30 PM",
+            Venue = "Concert Hall"
+        },
+        new EventData 
+        { 
+            Title = "Rock Band Competition",
+            Description = "Witness the battle of the bands as our rock music students showcase their talent.",
+            Date = "July 20, 2024",
+            Time = "5:00 PM",
+            Venue = "Outdoor Arena"
+        }
+    };
+
+    private void ToggleMenu()
+    {
+        isMenuOpen = !isMenuOpen;
+    }
+
+    private void NextSlide()
+    {
+        if (currentSlide < events.Length - 1)
+            currentSlide++;
+    }
+
+    private void PrevSlide()
+    {
+        if (currentSlide > 0)
+            currentSlide--;
+    }
+
+    public class EventData
+    {
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string Date { get; set; }
+        public string Time { get; set; }
+        public string Venue { get; set; }
+    }
+}
+
+<script>
+    window.scrollToElement = (elementId) => {
+        const element = document.getElementById(elementId);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    window.addResizeListener = (dotnetHelper) => {
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                dotnetHelper.invokeMethodAsync('HandleResize');
+            }
+        });
+    };
+</script>
