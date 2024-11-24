@@ -13,7 +13,7 @@ A responsive single-page website template for Arts and Music Academy built with 
 
 ## Technologies Used
 
-- Blazor WebAssembly
+- Blazor Server
 - C#
 - HTML5
 - CSS3
