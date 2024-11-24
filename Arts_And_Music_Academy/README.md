@@ -29,10 +29,15 @@ A responsive single-page website template for Arts and Music Academy built with 
 5. **Contact**: Contact information and enquiry form.
 
 ## Demo
-Here's a demonstration of the project in action:
+Here's a demonstration of the project:
 
-![Demo GIF](/Images/fullScreen.gif)
-![Demo GIF](/Images/mobile-view.gif)
+**Desktop View**
+
+![Demo GIF](./wwwroot/Images/fullScreen.gif)
+
+**MObile View** 
+
+![Demo GIF](./wwwroot/Images/mobile-view.gif)
 
 
 ## Setup Instructions
